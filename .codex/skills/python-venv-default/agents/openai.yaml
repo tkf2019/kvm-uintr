@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python Venv Default"
+  short_description: "Use repo-local .venv for Python work"
+  default_prompt: "Use $python-venv-default to run Python commands through the repository .venv by default."

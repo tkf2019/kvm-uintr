@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kvm Uintr Dev"
+  short_description: "Build and port KVM UINTR support"
+  default_prompt: "Use $kvm-uintr-dev to research, port, and validate Intel UINTR support for KVM and QEMU."

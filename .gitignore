@@ -20,3 +20,6 @@ modules.order
 .tmp_versions/
 
 compile_commands.json
+
+thirdparty/**
+!thirdparty/.gitkeep

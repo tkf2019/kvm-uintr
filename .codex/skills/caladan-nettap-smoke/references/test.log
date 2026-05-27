@@ -1,0 +1,1047 @@
++++ dirname -- ./test.sh
+++ cd -- .
+++ pwd
++ REPO_ROOT=$CALADAN_ROOT
++ cd $CALADAN_ROOT
++ IOK_LOG=/tmp/iokernel_${USER}.log
++ trap cleanup EXIT
++ sudo pkill iokerneld
++ true
++ sudo pkill -9 netperf
++ true
++ sudo scripts/setup_machine.sh ''
+kernel.shm_rmid_forced = 1
+kernel.shmmax = 18446744073692774399
+vm.hugetlb_shm_group = 27
+vm.max_map_count = 16777216
+net.core.somaxconn = 3072
++ IOK_PID=254163
++ grep -q 'running dataplan' /tmp/iokernel_${USER}.log
++ sudo ./iokerneld ias nobw noht no_hw_qdel numanode -1 -- --allow 00:00.0 --vdev=net_tap0
++ sleep 0.3
++ pgrep iokerneld
++ cat /tmp/iokernel_${USER}.log
+CPU 09| <5> thread: created thread 0 [tid: 254168]
+CPU 09| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
++ grep -q 'running dataplan' /tmp/iokernel_${USER}.log
++ sleep 0.3
++ pgrep iokerneld
++ cat /tmp/iokernel_${USER}.log
+CPU 09| <5> thread: created thread 0 [tid: 254168]
+CPU 09| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+CPU 09| <5> time: detected 3686 ticks / us
+[  0.000389] CPU 09| <5> sched: CPU configuration...
+	node 0: [0][1][2][3][4][5][6][7][8][9][10][11][12][13]
+[  0.000400] CPU 09| <5> sched: dataplane on 1, control on 0
++ grep -q 'running dataplan' /tmp/iokernel_${USER}.log
++ sleep 0.3
++ pgrep iokerneld
++ cat /tmp/iokernel_${USER}.log
+CPU 09| <5> thread: created thread 0 [tid: 254168]
+CPU 09| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+CPU 09| <5> time: detected 3686 ticks / us
+[  0.000389] CPU 09| <5> sched: CPU configuration...
+	node 0: [0][1][2][3][4][5][6][7][8][9][10][11][12][13]
+[  0.000400] CPU 09| <5> sched: dataplane on 1, control on 0
+[  0.151640] CPU 01| <5> control: spawning control thread
+EAL: Detected CPU lcores: 14
+EAL: Detected NUMA nodes: 1
+EAL: Detected static linkage of DPDK
+EAL: Multi-process socket /var/run/dpdk/rte/mp_socket
+EAL: Selected IOVA mode 'VA'
+[  0.200725] CPU 01| <5> dpdk: driver: net_tap port 0 MAC: c2 2e bf 01 11 0e
+[  0.200749] CPU 01| <5> dma: copy engine disabled
+[  0.200753] CPU 01| <5> UINTR: enabled
+[  0.200754] CPU 01| <5> main: core 1 running dataplane. [Ctrl+C to quit]
++ grep -q 'running dataplan' /tmp/iokernel_${USER}.log
+++ getconf _NPROCESSORS_ONLN
++ CORES=14
+++ grep -v storage
+++ find tests -name 'test_*' -executable
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_base_gen /proc/self/fd/10 /proc/self/fd/11
+CPU 08| <5> thread: created thread 0 [tid: 254210]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+CPU 08| <5> time: detected 3686 ticks / us
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_base_hello /proc/self/fd/12 /proc/self/fd/13
+CPU 08| <5> thread: created thread 0 [tid: 254222]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+CPU 08| <5> time: detected 3686 ticks / us
+[  0.000326] CPU 08| <5> hello world!
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_base_lrpc /proc/self/fd/14 /proc/self/fd/15
+CPU 08| <5> thread: created thread 0 [tid: 254235]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+CPU 08| <5> time: detected 3686 ticks / us
+[  0.000757] CPU 04| <5> thread: created thread 1 [tid: 254243]
+[  0.130773] CPU 03| <5> echoed 7693136.183897 messages / second
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_base_thread /proc/self/fd/16 /proc/self/fd/17
+CPU 08| <5> thread: created thread 0 [tid: 254244]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+CPU 08| <5> time: detected 3686 ticks / us
+[  0.000748] CPU 05| <5> thread: created thread 1 [tid: 254245]
+[  0.000760] CPU 10| <5> thread: created thread 2 [tid: 254246]
+[  0.000776] CPU 05| <5> hello thread 1
+[  0.000786] CPU 10| <5> hello thread 2
+[  0.000793] CPU 11| <5> thread: created thread 3 [tid: 254247]
+[  0.000803] CPU 11| <5> hello thread 3
+[  0.000853] CPU 06| <5> thread: created thread 4 [tid: 254248]
+[  0.000869] CPU 09| <5> thread: created thread 5 [tid: 254249]
+[  0.000872] CPU 06| <5> hello thread 4
+[  0.000883] CPU 05| <5> thread: created thread 6 [tid: 254250]
+[  0.000891] CPU 09| <5> hello thread 5
+[  0.000905] CPU 11| <5> thread: created thread 7 [tid: 254251]
+[  0.000912] CPU 05| <5> hello thread 6
+[  0.000919] CPU 11| <5> hello thread 7
+[  0.000933] CPU 10| <5> thread: created thread 8 [tid: 254252]
+[  0.000937] CPU 10| <5> hello thread 8
+[  0.000958] CPU 05| <5> thread: created thread 9 [tid: 254253]
+[  0.000961] CPU 05| <5> hello thread 9
+[  0.000981] CPU 11| <5> thread: created thread 10 [tid: 254254]
+[  0.000986] CPU 11| <5> hello thread 10
+[  0.001017] CPU 07| <5> thread: created thread 11 [tid: 254255]
+[  0.001024] CPU 11| <5> thread: created thread 12 [tid: 254256]
+[  0.001026] CPU 07| <5> hello thread 11
+[  0.001028] CPU 11| <5> hello thread 12
+[  0.001053] CPU 10| <5> thread: created thread 13 [tid: 254257]
+[  0.001058] CPU 10| <5> hello thread 13
+[  0.001089] CPU 08| <5> joined all threads
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_kthread_attach /proc/self/fd/18 /proc/self/fd/19
+CPU 08| <5> thread: created thread 0 [tid: 254258]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000551] CPU 08| <5> loading configuration from '/proc/self/fd/18'
+[  0.000584] CPU 08| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000586] CPU 08| <5> cfg: task is latency critical (LC)
+[  0.000588] CPU 08| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000590] CPU 08| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000595] CPU 08| <5> process pid: 254258
+[  0.015410] CPU 08| <5> shm: using 71303168 bytes
+[  0.015432] CPU 08| <5> uintr: enabled
+[  0.015436] CPU 08| <5> net: started network stack
+[  0.015438] CPU 08| <5> net: using the following configuration:
+[  0.015440] CPU 08| <5>   addr:	192.168.1.5
+[  0.015441] CPU 08| <5>   netmask:	255.255.255.0
+[  0.015442] CPU 08| <5>   gateway:	192.168.1.1
+[  0.015444] CPU 08| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.015445] CPU 08| <5>   mtu:		1500
+[  0.015449] CPU 08| <3> ****************************************************************************************
+[  0.015451] CPU 08| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.015452] CPU 08| <3> *                                                                                      *
+[  0.015453] CPU 08| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.015454] CPU 08| <3> *                                                                                      *
+[  0.015456] CPU 08| <3> ****************************************************************************************
+[  0.015707] CPU 08| <5> spawning 12 kthreads
+[  0.015761] CPU 10| <5> thread: created thread 1 [tid: 254259]
+[  0.015823] CPU 05| <5> thread: created thread 2 [tid: 254260]
+[  0.015988] CPU 08| <5> thread: created thread 3 [tid: 254261]
+[  0.016221] CPU 07| <5> thread: created thread 4 [tid: 254262]
+[  0.016243] CPU 10| <5> thread: created thread 5 [tid: 254263]
+[  0.016329] CPU 06| <5> thread: created thread 6 [tid: 254264]
+[  0.016364] CPU 11| <5> thread: created thread 7 [tid: 254265]
+[  0.016448] CPU 03| <5> thread: created thread 8 [tid: 254266]
+[  0.016462] CPU 04| <5> thread: created thread 9 [tid: 254267]
+[  0.017212] CPU 06| <5> thread: created thread 10 [tid: 254268]
+[  0.017433] CPU 02| <5> thread: created thread 11 [tid: 254269]
+[  0.017930] CPU 02| <5> started main_handler() thread
+[  2.022886] CPU 02| <5> finished 10 rounds of spawning threads to test RCU
+[  2.025917] CPU 02| <5> finished 10 rounds of spawning threads to test timer merging
+[  2.025927] CPU 02| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_kthread_wakeup /proc/self/fd/20 /proc/self/fd/21
+CPU 10| <5> thread: created thread 0 [tid: 254341]
+CPU 10| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000318] CPU 10| <5> loading configuration from '/proc/self/fd/20'
+[  0.000355] CPU 10| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000361] CPU 10| <5> cfg: task is latency critical (LC)
+[  0.000363] CPU 10| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000364] CPU 10| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000368] CPU 10| <5> process pid: 254341
+[  0.014724] CPU 10| <5> shm: using 71303168 bytes
+[  0.014749] CPU 10| <5> uintr: enabled
+[  0.014754] CPU 10| <5> net: started network stack
+[  0.014755] CPU 10| <5> net: using the following configuration:
+[  0.014757] CPU 10| <5>   addr:	192.168.1.5
+[  0.014759] CPU 10| <5>   netmask:	255.255.255.0
+[  0.014760] CPU 10| <5>   gateway:	192.168.1.1
+[  0.014761] CPU 10| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014763] CPU 10| <5>   mtu:		1500
+[  0.014767] CPU 10| <3> ****************************************************************************************
+[  0.014768] CPU 10| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014770] CPU 10| <3> *                                                                                      *
+[  0.014771] CPU 10| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014772] CPU 10| <3> *                                                                                      *
+[  0.014773] CPU 10| <3> ****************************************************************************************
+[  0.015030] CPU 10| <5> spawning 12 kthreads
+[  0.015125] CPU 08| <5> thread: created thread 1 [tid: 254343]
+[  0.015186] CPU 06| <5> thread: created thread 2 [tid: 254342]
+[  0.015212] CPU 04| <5> thread: created thread 3 [tid: 254344]
+[  0.015445] CPU 09| <5> thread: created thread 4 [tid: 254345]
+[  0.015483] CPU 05| <5> thread: created thread 5 [tid: 254346]
+[  0.015532] CPU 11| <5> thread: created thread 6 [tid: 254347]
+[  0.015655] CPU 04| <5> thread: created thread 7 [tid: 254348]
+[  0.015742] CPU 02| <5> thread: created thread 8 [tid: 254349]
+[  0.016239] CPU 04| <5> thread: created thread 9 [tid: 254350]
+[  0.016481] CPU 04| <5> thread: created thread 10 [tid: 254351]
+[  0.016500] CPU 05| <5> thread: created thread 11 [tid: 254352]
+[  0.017397] CPU 02| <5> started main_handler() thread
+[  0.037601] CPU 02| <5> ran 1000 threads
+[  0.037613] CPU 02| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_many_threads /proc/self/fd/22 /proc/self/fd/23
+CPU 11| <5> thread: created thread 0 [tid: 254353]
+CPU 11| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000562] CPU 11| <5> loading configuration from '/proc/self/fd/22'
+[  0.000605] CPU 11| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000608] CPU 11| <5> cfg: task is latency critical (LC)
+[  0.000609] CPU 11| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000611] CPU 11| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000622] CPU 11| <5> process pid: 254353
+[  0.014945] CPU 11| <5> shm: using 71303168 bytes
+[  0.014973] CPU 11| <5> uintr: enabled
+[  0.014978] CPU 11| <5> net: started network stack
+[  0.014982] CPU 11| <5> net: using the following configuration:
+[  0.014984] CPU 11| <5>   addr:	192.168.1.5
+[  0.014986] CPU 11| <5>   netmask:	255.255.255.0
+[  0.014987] CPU 11| <5>   gateway:	192.168.1.1
+[  0.014988] CPU 11| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014990] CPU 11| <5>   mtu:		1500
+[  0.014994] CPU 11| <3> ****************************************************************************************
+[  0.014996] CPU 11| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014997] CPU 11| <3> *                                                                                      *
+[  0.014999] CPU 11| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.015005] CPU 11| <3> *                                                                                      *
+[  0.015017] CPU 11| <3> ****************************************************************************************
+[  0.015297] CPU 11| <5> spawning 12 kthreads
+[  0.015389] CPU 08| <5> thread: created thread 1 [tid: 254355]
+[  0.015427] CPU 05| <5> thread: created thread 2 [tid: 254354]
+[  0.015749] CPU 04| <5> thread: created thread 3 [tid: 254356]
+[  0.015770] CPU 09| <5> thread: created thread 4 [tid: 254357]
+[  0.015816] CPU 06| <5> thread: created thread 5 [tid: 254358]
+[  0.015853] CPU 10| <5> thread: created thread 6 [tid: 254359]
+[  0.015881] CPU 05| <5> thread: created thread 7 [tid: 254360]
+[  0.015968] CPU 08| <5> thread: created thread 8 [tid: 254361]
+[  0.016010] CPU 02| <5> thread: created thread 9 [tid: 254362]
+[  0.016101] CPU 03| <5> thread: created thread 10 [tid: 254363]
+[  0.016869] CPU 00| <5> thread: created thread 11 [tid: 254364]
+[  0.017396] CPU 02| <5> started main_handler() thread
+[  0.186429] CPU 04| <5> spawned 295808.978394 threads / second
+[  0.186495] CPU 04| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_multiple_runtimes /proc/self/fd/24 /proc/self/fd/25
+CPU 07| <5> thread: created thread 0 [tid: 254366]
+CPU 07| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000327] CPU 07| <5> loading configuration from '/proc/self/fd/24'
+[  0.000369] CPU 07| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000373] CPU 07| <5> cfg: task is latency critical (LC)
+[  0.000375] CPU 07| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000377] CPU 07| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000380] CPU 07| <5> process pid: 254366
+[  0.014704] CPU 07| <5> shm: using 71303168 bytes
+[  0.014731] CPU 07| <5> uintr: enabled
+[  0.014738] CPU 07| <5> net: started network stack
+[  0.014740] CPU 07| <5> net: using the following configuration:
+[  0.014742] CPU 07| <5>   addr:	192.168.1.5
+[  0.014744] CPU 07| <5>   netmask:	255.255.255.0
+[  0.014745] CPU 07| <5>   gateway:	192.168.1.1
+[  0.014747] CPU 07| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014748] CPU 07| <5>   mtu:		1500
+[  0.014753] CPU 07| <3> ****************************************************************************************
+[  0.014754] CPU 07| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014756] CPU 07| <3> *                                                                                      *
+[  0.014757] CPU 07| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014758] CPU 07| <3> *                                                                                      *
+[  0.014759] CPU 07| <3> ****************************************************************************************
+[  0.015066] CPU 07| <5> spawning 12 kthreads
+[  0.015190] CPU 05| <5> thread: created thread 1 [tid: 254368]
+[  0.015189] CPU 09| <5> thread: created thread 2 [tid: 254367]
+[  0.015196] CPU 10| <5> thread: created thread 3 [tid: 254369]
+[  0.015236] CPU 06| <5> thread: created thread 4 [tid: 254370]
+[  0.015276] CPU 08| <5> thread: created thread 5 [tid: 254371]
+[  0.015317] CPU 04| <5> thread: created thread 6 [tid: 254372]
+[  0.015390] CPU 00| <5> thread: created thread 7 [tid: 254373]
+[  0.015511] CPU 02| <5> thread: created thread 8 [tid: 254374]
+[  0.016165] CPU 03| <5> thread: created thread 9 [tid: 254375]
+[  0.016490] CPU 12| <5> thread: created thread 10 [tid: 254376]
+[  0.016496] CPU 02| <5> thread: created thread 11 [tid: 254377]
+CPU 04| <5> thread: created thread 0 [tid: 254401]
+CPU 04| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000601] CPU 04| <5> loading configuration from '/proc/self/fd/25'
+[  0.000669] CPU 04| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000676] CPU 04| <5> cfg: task is latency critical (LC)
+[  0.000690] CPU 04| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000713] CPU 04| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000721] CPU 04| <5> process pid: 254401
+[  0.014798] CPU 04| <5> shm: using 71303168 bytes
+[  0.014824] CPU 04| <5> uintr: enabled
+[  0.014829] CPU 04| <5> net: started network stack
+[  0.014831] CPU 04| <5> net: using the following configuration:
+[  0.014832] CPU 04| <5>   addr:	192.168.1.6
+[  0.014834] CPU 04| <5>   netmask:	255.255.255.0
+[  0.014837] CPU 04| <5>   gateway:	192.168.1.1
+[  0.014840] CPU 04| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014841] CPU 04| <5>   mtu:		1500
+[  0.014845] CPU 04| <3> ****************************************************************************************
+[  0.014848] CPU 04| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014850] CPU 04| <3> *                                                                                      *
+[  0.014851] CPU 04| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014852] CPU 04| <3> *                                                                                      *
+[  0.014855] CPU 04| <3> ****************************************************************************************
+[  0.015148] CPU 04| <5> spawning 12 kthreads
+[  0.015256] CPU 05| <5> thread: created thread 2 [tid: 254403]
+[  0.015269] CPU 11| <5> thread: created thread 1 [tid: 254402]
+[  0.015327] CPU 10| <5> thread: created thread 3 [tid: 254404]
+[  0.015398] CPU 07| <5> thread: created thread 4 [tid: 254405]
+[  0.015452] CPU 09| <5> thread: created thread 5 [tid: 254406]
+[  0.015520] CPU 06| <5> thread: created thread 6 [tid: 254407]
+[  0.015606] CPU 02| <5> thread: created thread 7 [tid: 254408]
+[  0.015903] CPU 03| <5> thread: created thread 8 [tid: 254409]
+[  0.015912] CPU 05| <5> thread: created thread 9 [tid: 254410]
+[  0.016618] CPU 05| <5> thread: created thread 10 [tid: 254411]
+[  0.016705] CPU 11| <5> thread: created thread 11 [tid: 254412]
+[  5.017594] CPU 02| <5> exiting runtime
+[  5.017638] CPU 02| <5> init: shutting down -> SUCCESS
+[  5.017745] CPU 02| <5> exiting runtime
+[  5.017779] CPU 02| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_ping /proc/self/fd/26 /proc/self/fd/27
+CPU 08| <5> thread: created thread 0 [tid: 254489]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000326] CPU 08| <5> loading configuration from '/proc/self/fd/26'
+[  0.000357] CPU 08| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000361] CPU 08| <5> cfg: task is latency critical (LC)
+[  0.000362] CPU 08| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000364] CPU 08| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000368] CPU 08| <5> process pid: 254489
+[  0.014683] CPU 08| <5> shm: using 71303168 bytes
+[  0.014710] CPU 08| <5> uintr: enabled
+[  0.014715] CPU 08| <5> net: started network stack
+[  0.014717] CPU 08| <5> net: using the following configuration:
+[  0.014719] CPU 08| <5>   addr:	192.168.1.5
+[  0.014720] CPU 08| <5>   netmask:	255.255.255.0
+[  0.014721] CPU 08| <5>   gateway:	192.168.1.1
+[  0.014723] CPU 08| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014724] CPU 08| <5>   mtu:		1500
+[  0.014728] CPU 08| <3> ****************************************************************************************
+[  0.014730] CPU 08| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014731] CPU 08| <3> *                                                                                      *
+[  0.014732] CPU 08| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014733] CPU 08| <3> *                                                                                      *
+[  0.014734] CPU 08| <3> ****************************************************************************************
+[  0.015012] CPU 08| <5> spawning 12 kthreads
+[  0.015109] CPU 11| <5> thread: created thread 1 [tid: 254491]
+[  0.015165] CPU 07| <5> thread: created thread 2 [tid: 254490]
+[  0.015342] CPU 10| <5> thread: created thread 4 [tid: 254493]
+[  0.015343] CPU 06| <5> thread: created thread 3 [tid: 254492]
+[  0.015612] CPU 09| <5> thread: created thread 5 [tid: 254494]
+[  0.015667] CPU 05| <5> thread: created thread 6 [tid: 254495]
+[  0.015922] CPU 06| <5> thread: created thread 7 [tid: 254496]
+[  0.016013] CPU 03| <5> thread: created thread 8 [tid: 254497]
+[  0.016301] CPU 10| <5> thread: created thread 9 [tid: 254498]
+[  0.016419] CPU 08| <5> thread: created thread 10 [tid: 254499]
+[  0.016699] CPU 06| <5> thread: created thread 11 [tid: 254500]
+[ 10.017964] CPU 02| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_runtime_mutexes /proc/self/fd/28 /proc/self/fd/29
+CPU 08| <5> thread: created thread 0 [tid: 254612]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000328] CPU 08| <5> loading configuration from '/proc/self/fd/28'
+[  0.000353] CPU 08| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000356] CPU 08| <5> cfg: task is latency critical (LC)
+[  0.000358] CPU 08| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000359] CPU 08| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000364] CPU 08| <5> process pid: 254612
+[  0.014806] CPU 08| <5> shm: using 71303168 bytes
+[  0.014831] CPU 08| <5> uintr: enabled
+[  0.014836] CPU 08| <5> net: started network stack
+[  0.014837] CPU 08| <5> net: using the following configuration:
+[  0.014839] CPU 08| <5>   addr:	192.168.1.5
+[  0.014841] CPU 08| <5>   netmask:	255.255.255.0
+[  0.014843] CPU 08| <5>   gateway:	192.168.1.1
+[  0.014844] CPU 08| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014846] CPU 08| <5>   mtu:		1500
+[  0.014851] CPU 08| <3> ****************************************************************************************
+[  0.014853] CPU 08| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014854] CPU 08| <3> *                                                                                      *
+[  0.014856] CPU 08| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014857] CPU 08| <3> *                                                                                      *
+[  0.014858] CPU 08| <3> ****************************************************************************************
+[  0.015148] CPU 08| <5> spawning 12 kthreads
+[  0.015250] CPU 09| <5> thread: created thread 2 [tid: 254614]
+[  0.015261] CPU 04| <5> thread: created thread 1 [tid: 254613]
+[  0.015307] CPU 05| <5> thread: created thread 3 [tid: 254615]
+[  0.015365] CPU 10| <5> thread: created thread 4 [tid: 254616]
+[  0.015417] CPU 07| <5> thread: created thread 5 [tid: 254617]
+[  0.015488] CPU 11| <5> thread: created thread 6 [tid: 254618]
+[  0.015599] CPU 03| <5> thread: created thread 7 [tid: 254619]
+[  0.015612] CPU 05| <5> thread: created thread 8 [tid: 254620]
+[  0.016324] CPU 02| <5> thread: created thread 9 [tid: 254621]
+[  0.016562] CPU 09| <5> thread: created thread 10 [tid: 254622]
+[  0.016750] CPU 09| <5> thread: created thread 11 [tid: 254623]
+[  0.017657] CPU 02| <5> started main_handler() thread
+[  0.094575] CPU 02| <5> spawned threads
+[  0.306858] CPU 05| <5> Done sending messages
+[  0.311959] CPU 13| <5> 2583605.473110 messages / second
+[  0.312018] CPU 13| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_runtime_rcu /proc/self/fd/30 /proc/self/fd/31
+CPU 11| <5> thread: created thread 0 [tid: 254624]
+CPU 11| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000337] CPU 11| <5> loading configuration from '/proc/self/fd/30'
+[  0.000365] CPU 11| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000377] CPU 11| <5> cfg: task is latency critical (LC)
+[  0.000391] CPU 11| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000394] CPU 11| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000398] CPU 11| <5> process pid: 254624
+[  0.014837] CPU 11| <5> shm: using 71303168 bytes
+[  0.014862] CPU 11| <5> uintr: enabled
+[  0.014867] CPU 11| <5> net: started network stack
+[  0.014869] CPU 11| <5> net: using the following configuration:
+[  0.014871] CPU 11| <5>   addr:	192.168.1.5
+[  0.014874] CPU 11| <5>   netmask:	255.255.255.0
+[  0.014877] CPU 11| <5>   gateway:	192.168.1.1
+[  0.014878] CPU 11| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014880] CPU 11| <5>   mtu:		1500
+[  0.014885] CPU 11| <3> ****************************************************************************************
+[  0.014888] CPU 11| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014890] CPU 11| <3> *                                                                                      *
+[  0.014893] CPU 11| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014895] CPU 11| <3> *                                                                                      *
+[  0.014896] CPU 11| <3> ****************************************************************************************
+[  0.015182] CPU 11| <5> spawning 12 kthreads
+[  0.015276] CPU 09| <5> thread: created thread 1 [tid: 254626]
+[  0.015316] CPU 06| <5> thread: created thread 2 [tid: 254625]
+[  0.015485] CPU 05| <5> thread: created thread 3 [tid: 254627]
+[  0.015487] CPU 04| <5> thread: created thread 4 [tid: 254628]
+[  0.015667] CPU 08| <5> thread: created thread 5 [tid: 254629]
+[  0.015736] CPU 10| <5> thread: created thread 6 [tid: 254630]
+[  0.015808] CPU 02| <5> thread: created thread 7 [tid: 254631]
+[  0.015863] CPU 03| <5> thread: created thread 8 [tid: 254632]
+[  0.016640] CPU 04| <5> thread: created thread 9 [tid: 254633]
+[  0.016756] CPU 12| <5> thread: created thread 10 [tid: 254634]
+[  0.016781] CPU 06| <5> thread: created thread 11 [tid: 254635]
+[  0.018099] CPU 02| <5> started main_handler() thread
+[  0.018107] CPU 02| <5> testing rcu_free()...
+[  0.018109] CPU 02| <5> creating 100 threads to read an RCU object.
+[  0.461252] CPU 05| <5> readers finished.
+[  0.461296] CPU 05| <5> RCU release finished.
+[  0.461300] CPU 05| <5> testing synchronize_rcu()...
+[  0.461302] CPU 05| <5> creating 100 threads to read an RCU object.
+[  0.940372] CPU 10| <5> readers finished.
+[  0.940404] CPU 10| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_runtime_smalloc /proc/self/fd/32 /proc/self/fd/33
+CPU 08| <5> thread: created thread 0 [tid: 254661]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000321] CPU 08| <5> loading configuration from '/proc/self/fd/32'
+[  0.000351] CPU 08| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000355] CPU 08| <5> cfg: task is latency critical (LC)
+[  0.000357] CPU 08| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000359] CPU 08| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000364] CPU 08| <5> process pid: 254661
+[  0.014743] CPU 08| <5> shm: using 71303168 bytes
+[  0.014767] CPU 08| <5> uintr: enabled
+[  0.014773] CPU 08| <5> net: started network stack
+[  0.014775] CPU 08| <5> net: using the following configuration:
+[  0.014776] CPU 08| <5>   addr:	192.168.1.5
+[  0.014781] CPU 08| <5>   netmask:	255.255.255.0
+[  0.014783] CPU 08| <5>   gateway:	192.168.1.1
+[  0.014785] CPU 08| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014786] CPU 08| <5>   mtu:		1500
+[  0.014793] CPU 08| <3> ****************************************************************************************
+[  0.014795] CPU 08| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014799] CPU 08| <3> *                                                                                      *
+[  0.014808] CPU 08| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014823] CPU 08| <3> *                                                                                      *
+[  0.014825] CPU 08| <3> ****************************************************************************************
+[  0.015138] CPU 08| <5> spawning 12 kthreads
+[  0.015250] CPU 09| <5> thread: created thread 1 [tid: 254663]
+[  0.015257] CPU 06| <5> thread: created thread 2 [tid: 254662]
+[  0.015275] CPU 05| <5> thread: created thread 3 [tid: 254664]
+[  0.015286] CPU 10| <5> thread: created thread 4 [tid: 254665]
+[  0.015347] CPU 04| <5> thread: created thread 5 [tid: 254666]
+[  0.015419] CPU 11| <5> thread: created thread 6 [tid: 254667]
+[  0.015501] CPU 03| <5> thread: created thread 7 [tid: 254668]
+[  0.015972] CPU 06| <5> thread: created thread 8 [tid: 254669]
+[  0.016278] CPU 08| <5> thread: created thread 9 [tid: 254670]
+[  0.016462] CPU 00| <5> thread: created thread 10 [tid: 254671]
+[  0.016545] CPU 12| <5> thread: created thread 11 [tid: 254672]
+[  0.017532] CPU 02| <5> testing BASE smalloc performance
+[  0.018850] CPU 02| <5> smalloc 1 took: 23 cycles / allocation
+[  0.021213] CPU 02| <5> smalloc 2 took: 21 cycles / allocation
+[  0.025888] CPU 02| <5> smalloc 4 took: 21 cycles / allocation
+[  0.035398] CPU 02| <5> smalloc 8 took: 21 cycles / allocation
+[  0.054515] CPU 02| <5> smalloc 16 took: 22 cycles / allocation
+[  0.094146] CPU 02| <5> smalloc 32 took: 22 cycles / allocation
+[  0.176199] CPU 02| <5> smalloc 64 took: 23 cycles / allocation
+[  0.342796] CPU 02| <5> smalloc 128 took: 23 cycles / allocation
+[  0.681348] CPU 02| <5> smalloc 256 took: 24 cycles / allocation
+[  0.681356] CPU 02| <5> testing BASE smalloc performance (warmed up)
+[  0.682590] CPU 02| <5> smalloc 1 took: 22 cycles / allocation
+[  0.684918] CPU 02| <5> smalloc 2 took: 21 cycles / allocation
+[  0.689580] CPU 02| <5> smalloc 4 took: 21 cycles / allocation
+[  0.699057] CPU 02| <5> smalloc 8 took: 21 cycles / allocation
+[  0.718507] CPU 02| <5> smalloc 16 took: 22 cycles / allocation
+[  0.758988] CPU 02| <5> smalloc 32 took: 23 cycles / allocation
+[  0.842133] CPU 02| <5> smalloc 64 took: 23 cycles / allocation
+[  1.010022] CPU 02| <5> smalloc 128 took: 24 cycles / allocation
+[  1.346812] CPU 02| <5> smalloc 256 took: 24 cycles / allocation
+[  1.346821] CPU 02| <5> testing GLIBC malloc performance
+[  1.347914] CPU 02| <5> malloc 1 took: 20 cycles / allocation
+[  1.350086] CPU 02| <5> malloc 2 took: 19 cycles / allocation
+[  1.354169] CPU 02| <5> malloc 4 took: 18 cycles / allocation
+[  1.364893] CPU 02| <5> malloc 8 took: 24 cycles / allocation
+[  1.420801] CPU 02| <5> malloc 16 took: 64 cycles / allocation
+[  1.570286] CPU 02| <5> malloc 32 took: 86 cycles / allocation
+[  1.898757] CPU 02| <5> malloc 64 took: 94 cycles / allocation
+[  2.589289] CPU 02| <5> malloc 128 took: 99 cycles / allocation
+[  4.040713] CPU 02| <5> malloc 256 took: 104 cycles / allocation
+[  4.040726] CPU 02| <5> testing GLIBC malloc performance (warmed up)
+[  4.041846] CPU 02| <5> malloc 1 took: 20 cycles / allocation
+[  4.044072] CPU 02| <5> malloc 2 took: 20 cycles / allocation
+[  4.048371] CPU 02| <5> malloc 4 took: 19 cycles / allocation
+[  4.059465] CPU 02| <5> malloc 8 took: 25 cycles / allocation
+[  4.117065] CPU 02| <5> malloc 16 took: 66 cycles / allocation
+[  4.270204] CPU 02| <5> malloc 32 took: 88 cycles / allocation
+[  4.609346] CPU 02| <5> malloc 64 took: 97 cycles / allocation
+[  5.312735] CPU 02| <5> malloc 128 took: 101 cycles / allocation
+[  6.732299] CPU 02| <5> malloc 256 took: 102 cycles / allocation
+[  6.732313] CPU 02| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_runtime_threads /proc/self/fd/34 /proc/self/fd/35
+CPU 09| <5> thread: created thread 0 [tid: 254748]
+CPU 09| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000325] CPU 09| <5> loading configuration from '/proc/self/fd/34'
+[  0.000361] CPU 09| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000376] CPU 09| <5> cfg: task is latency critical (LC)
+[  0.000378] CPU 09| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000380] CPU 09| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000385] CPU 09| <5> process pid: 254748
+[  0.014859] CPU 09| <5> shm: using 71303168 bytes
+[  0.014889] CPU 09| <5> uintr: enabled
+[  0.014894] CPU 09| <5> net: started network stack
+[  0.014897] CPU 09| <5> net: using the following configuration:
+[  0.014899] CPU 09| <5>   addr:	192.168.1.5
+[  0.014901] CPU 09| <5>   netmask:	255.255.255.0
+[  0.014902] CPU 09| <5>   gateway:	192.168.1.1
+[  0.014906] CPU 09| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014907] CPU 09| <5>   mtu:		1500
+[  0.014912] CPU 09| <3> ****************************************************************************************
+[  0.014916] CPU 09| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014917] CPU 09| <3> *                                                                                      *
+[  0.014922] CPU 09| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014924] CPU 09| <3> *                                                                                      *
+[  0.014925] CPU 09| <3> ****************************************************************************************
+[  0.015224] CPU 09| <5> spawning 12 kthreads
+[  0.015334] CPU 10| <5> thread: created thread 2 [tid: 254750]
+[  0.015335] CPU 06| <5> thread: created thread 1 [tid: 254749]
+[  0.015346] CPU 07| <5> thread: created thread 3 [tid: 254751]
+[  0.015372] CPU 11| <5> thread: created thread 4 [tid: 254752]
+[  0.015416] CPU 05| <5> thread: created thread 5 [tid: 254753]
+[  0.015447] CPU 08| <5> thread: created thread 6 [tid: 254754]
+[  0.015560] CPU 02| <5> thread: created thread 7 [tid: 254755]
+[  0.015595] CPU 00| <5> thread: created thread 8 [tid: 254756]
+[  0.015685] CPU 03| <5> thread: created thread 9 [tid: 254757]
+[  0.016404] CPU 09| <5> thread: created thread 10 [tid: 254758]
+[  0.016427] CPU 09| <5> thread: created thread 11 [tid: 254759]
+[  0.017445] CPU 02| <5> started main_handler() thread
+[  0.017449] CPU 02| <5> creating threads with 1us of fake work.
+[  0.950158] CPU 06| <5> spawned 4288592.237434 threads / second, efficiency 4.288592
+[  0.950203] CPU 06| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_runtime_timer /proc/self/fd/36 /proc/self/fd/37
+CPU 11| <5> thread: created thread 0 [tid: 254760]
+CPU 11| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000325] CPU 11| <5> loading configuration from '/proc/self/fd/36'
+[  0.000353] CPU 11| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000358] CPU 11| <5> cfg: task is latency critical (LC)
+[  0.000360] CPU 11| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000362] CPU 11| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000367] CPU 11| <5> process pid: 254760
+[  0.014797] CPU 11| <5> shm: using 71303168 bytes
+[  0.014819] CPU 11| <5> uintr: enabled
+[  0.014824] CPU 11| <5> net: started network stack
+[  0.014826] CPU 11| <5> net: using the following configuration:
+[  0.014828] CPU 11| <5>   addr:	192.168.1.5
+[  0.014830] CPU 11| <5>   netmask:	255.255.255.0
+[  0.014831] CPU 11| <5>   gateway:	192.168.1.1
+[  0.014833] CPU 11| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014836] CPU 11| <5>   mtu:		1500
+[  0.014838] CPU 11| <3> ****************************************************************************************
+[  0.014839] CPU 11| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014841] CPU 11| <3> *                                                                                      *
+[  0.014842] CPU 11| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014852] CPU 11| <3> *                                                                                      *
+[  0.014869] CPU 11| <3> ****************************************************************************************
+[  0.015168] CPU 11| <5> spawning 12 kthreads
+[  0.015253] CPU 08| <5> thread: created thread 1 [tid: 254762]
+[  0.015305] CPU 05| <5> thread: created thread 2 [tid: 254761]
+[  0.015500] CPU 07| <5> thread: created thread 3 [tid: 254763]
+[  0.015535] CPU 10| <5> thread: created thread 4 [tid: 254764]
+[  0.015575] CPU 06| <5> thread: created thread 5 [tid: 254765]
+[  0.015631] CPU 09| <5> thread: created thread 6 [tid: 254766]
+[  0.015712] CPU 03| <5> thread: created thread 7 [tid: 254767]
+[  0.016171] CPU 00| <5> thread: created thread 8 [tid: 254768]
+[  0.016230] CPU 10| <5> thread: created thread 9 [tid: 254769]
+[  0.016591] CPU 10| <5> thread: created thread 10 [tid: 254770]
+[  0.016596] CPU 11| <5> thread: created thread 11 [tid: 254771]
+[  0.017808] CPU 02| <5> started main_handler() thread
+[  1.094377] CPU 10| <5> handled 92888459.537787 timeouts / second
+[  1.094430] CPU 10| <5> init: shutting down -> SUCCESS
++ for test in $(find tests -name 'test_*' -executable | grep -v storage)
++ gen_configs
++ exec
++ exec
++ tests/test_tcp_read /proc/self/fd/38 /proc/self/fd/39
+CPU 08| <5> thread: created thread 0 [tid: 254776]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000322] CPU 08| <5> loading configuration from '/proc/self/fd/38'
+[  0.000350] CPU 08| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000353] CPU 08| <5> cfg: task is latency critical (LC)
+[  0.000355] CPU 08| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000357] CPU 08| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000361] CPU 08| <5> process pid: 254776
+[  0.014777] CPU 08| <5> shm: using 71303168 bytes
+[  0.014804] CPU 08| <5> uintr: enabled
+[  0.014809] CPU 08| <5> net: started network stack
+[  0.014810] CPU 08| <5> net: using the following configuration:
+[  0.014812] CPU 08| <5>   addr:	192.168.1.5
+[  0.014814] CPU 08| <5>   netmask:	255.255.255.0
+[  0.014815] CPU 08| <5>   gateway:	192.168.1.1
+[  0.014816] CPU 08| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014818] CPU 08| <5>   mtu:		1500
+[  0.014823] CPU 08| <3> ****************************************************************************************
+[  0.014824] CPU 08| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014826] CPU 08| <3> *                                                                                      *
+[  0.014828] CPU 08| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014829] CPU 08| <3> *                                                                                      *
+[  0.014831] CPU 08| <3> ****************************************************************************************
+[  0.015118] CPU 08| <5> spawning 12 kthreads
+[  0.015207] CPU 09| <5> thread: created thread 1 [tid: 254778]
+[  0.015249] CPU 06| <5> thread: created thread 2 [tid: 254777]
+[  0.015545] CPU 04| <5> thread: created thread 3 [tid: 254779]
+[  0.015586] CPU 10| <5> thread: created thread 4 [tid: 254780]
+[  0.015596] CPU 11| <5> thread: created thread 5 [tid: 254781]
+[  0.015667] CPU 05| <5> thread: created thread 6 [tid: 254782]
+[  0.015695] CPU 06| <5> thread: created thread 7 [tid: 254783]
+[  0.015752] CPU 09| <5> thread: created thread 8 [tid: 254784]
+[  0.015843] CPU 00| <5> thread: created thread 9 [tid: 254785]
+[  0.015974] CPU 09| <5> thread: created thread 10 [tid: 254786]
+[  0.016616] CPU 05| <5> thread: created thread 11 [tid: 254787]
+[  0.017150] CPU 02| <5> tcp_read (small): mode=one write seed=0x12345678
+[  0.017174] CPU 02| <5> tcp_read (small): mode=two writes (split) seed=0x12345678
+[  0.017190] CPU 02| <5> tcp_read (small): mode=random segments seed=0x12345678
+[  0.017209] CPU 02| <5> tcp_read (long): len=20480 mode=random segments seed=0xabcdef01
+[  0.017665] CPU 02| <5> tcp_read (long): len=20480 peek=256 mode=random segments seed=0xabcdef02
+[  0.017701] CPU 02| <5> tcp_read tests passed
+[  0.017706] CPU 02| <5> init: shutting down -> SUCCESS
++ make -C bindings/cc/ -j librt++.a
+make: Entering directory '$CALADAN_ROOT/bindings/cc'
+make: 'librt++.a' is up to date.
+make: Leaving directory '$CALADAN_ROOT/bindings/cc'
++ make -C apps/bench/ netperf -j
+make: Entering directory '$CALADAN_ROOT/apps/bench'
+make: 'netperf' is up to date.
+make: Leaving directory '$CALADAN_ROOT/apps/bench'
++ gen_configs
++ exec
++ exec
++ NP_PID=254790
++ sleep 1
++ apps/bench/netperf /proc/self/fd/40 server
+CPU 08| <5> thread: created thread 0 [tid: 254790]
+CPU 08| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000327] CPU 08| <5> loading configuration from '/proc/self/fd/40'
+[  0.000357] CPU 08| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000360] CPU 08| <5> cfg: task is latency critical (LC)
+[  0.000362] CPU 08| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000364] CPU 08| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000369] CPU 08| <5> process pid: 254790
+[  0.015584] CPU 08| <5> shm: using 71303168 bytes
+[  0.015610] CPU 08| <5> uintr: enabled
+[  0.015615] CPU 08| <5> net: started network stack
+[  0.015617] CPU 08| <5> net: using the following configuration:
+[  0.015619] CPU 08| <5>   addr:	192.168.1.5
+[  0.015621] CPU 08| <5>   netmask:	255.255.255.0
+[  0.015622] CPU 08| <5>   gateway:	192.168.1.1
+[  0.015624] CPU 08| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.015625] CPU 08| <5>   mtu:		1500
+[  0.015627] CPU 08| <3> ****************************************************************************************
+[  0.015628] CPU 08| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.015630] CPU 08| <3> *                                                                                      *
+[  0.015632] CPU 08| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.015633] CPU 08| <3> *                                                                                      *
+[  0.015635] CPU 08| <3> ****************************************************************************************
+[  0.015934] CPU 08| <5> spawning 12 kthreads
+[  0.016021] CPU 11| <5> thread: created thread 2 [tid: 254793]
+[  0.016022] CPU 05| <5> thread: created thread 1 [tid: 254792]
+[  0.016032] CPU 04| <5> thread: created thread 3 [tid: 254794]
+[  0.016067] CPU 10| <5> thread: created thread 4 [tid: 254795]
+[  0.016095] CPU 07| <5> thread: created thread 5 [tid: 254796]
+[  0.016115] CPU 09| <5> thread: created thread 6 [tid: 254797]
+[  0.016214] CPU 02| <5> thread: created thread 7 [tid: 254798]
+[  0.016483] CPU 00| <5> thread: created thread 8 [tid: 254799]
+[  0.016490] CPU 07| <5> thread: created thread 9 [tid: 254800]
+[  0.017263] CPU 10| <5> thread: created thread 10 [tid: 254801]
+[  0.017344] CPU 08| <5> thread: created thread 11 [tid: 254802]
++ apps/bench/netperf /proc/self/fd/41 tcprr 192.168.1.5 10 10000 4096
+CPU 09| <5> thread: created thread 0 [tid: 254917]
+CPU 09| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000323] CPU 09| <5> loading configuration from '/proc/self/fd/41'
+[  0.000349] CPU 09| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000353] CPU 09| <5> cfg: task is latency critical (LC)
+[  0.000355] CPU 09| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000357] CPU 09| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000362] CPU 09| <5> process pid: 254917
+[  0.014993] CPU 09| <5> shm: using 71303168 bytes
+[  0.015019] CPU 09| <5> uintr: enabled
+[  0.015024] CPU 09| <5> net: started network stack
+[  0.015026] CPU 09| <5> net: using the following configuration:
+[  0.015028] CPU 09| <5>   addr:	192.168.1.6
+[  0.015037] CPU 09| <5>   netmask:	255.255.255.0
+[  0.015052] CPU 09| <5>   gateway:	192.168.1.1
+[  0.015054] CPU 09| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.015056] CPU 09| <5>   mtu:		1500
+[  0.015058] CPU 09| <3> ****************************************************************************************
+[  0.015059] CPU 09| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.015061] CPU 09| <3> *                                                                                      *
+[  0.015062] CPU 09| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.015064] CPU 09| <3> *                                                                                      *
+[  0.015065] CPU 09| <3> ****************************************************************************************
+[  0.015334] CPU 09| <5> spawning 12 kthreads
+[  0.015433] CPU 11| <5> thread: created thread 1 [tid: 254919]
+[  0.015478] CPU 04| <5> thread: created thread 2 [tid: 254918]
+[  0.015781] CPU 05| <5> thread: created thread 3 [tid: 254920]
+[  0.015807] CPU 10| <5> thread: created thread 4 [tid: 254921]
+[  0.015945] CPU 07| <5> thread: created thread 5 [tid: 254922]
+[  0.016014] CPU 11| <5> thread: created thread 6 [tid: 254923]
+[  0.016052] CPU 09| <5> thread: created thread 7 [tid: 254924]
+[  0.016129] CPU 02| <5> thread: created thread 8 [tid: 254925]
+[  0.016146] CPU 07| <5> thread: created thread 9 [tid: 254926]
+[  0.016900] CPU 05| <5> thread: created thread 10 [tid: 254927]
+[  0.017056] CPU 03| <5> thread: created thread 11 [tid: 254928]
+transferred 2012.27 MB/s
+transactions rate 49199.7 transactions/s
+request/response size 4096 bytes
+[  0.221254] CPU 02| <5> init: shutting down -> SUCCESS
++ gen_configs
++ exec
++ exec
++ apps/bench/netperf /proc/self/fd/43 tcpstream 192.168.1.5 10 10000 4096
+CPU 11| <5> thread: created thread 0 [tid: 254929]
+CPU 11| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000429] CPU 11| <5> loading configuration from '/proc/self/fd/43'
+[  0.000458] CPU 11| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000463] CPU 11| <5> cfg: task is latency critical (LC)
+[  0.000465] CPU 11| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000466] CPU 11| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000471] CPU 11| <5> process pid: 254929
+[  0.014812] CPU 11| <5> shm: using 71303168 bytes
+[  0.014834] CPU 11| <5> uintr: enabled
+[  0.014838] CPU 11| <5> net: started network stack
+[  0.014840] CPU 11| <5> net: using the following configuration:
+[  0.014842] CPU 11| <5>   addr:	192.168.1.6
+[  0.014844] CPU 11| <5>   netmask:	255.255.255.0
+[  0.014848] CPU 11| <5>   gateway:	192.168.1.1
+[  0.014849] CPU 11| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014851] CPU 11| <5>   mtu:		1500
+[  0.014852] CPU 11| <3> ****************************************************************************************
+[  0.014854] CPU 11| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014856] CPU 11| <3> *                                                                                      *
+[  0.014858] CPU 11| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014859] CPU 11| <3> *                                                                                      *
+[  0.014860] CPU 11| <3> ****************************************************************************************
+[  0.015110] CPU 11| <5> spawning 12 kthreads
+[  0.015198] CPU 10| <5> thread: created thread 1 [tid: 254931]
+[  0.015236] CPU 05| <5> thread: created thread 2 [tid: 254930]
+[  0.015576] CPU 08| <5> thread: created thread 4 [tid: 254933]
+[  0.015584] CPU 04| <5> thread: created thread 3 [tid: 254932]
+[  0.015630] CPU 06| <5> thread: created thread 5 [tid: 254934]
+[  0.015659] CPU 09| <5> thread: created thread 6 [tid: 254935]
+[  0.015702] CPU 05| <5> thread: created thread 7 [tid: 254936]
+[  0.015758] CPU 10| <5> thread: created thread 8 [tid: 254937]
+[  0.016043] CPU 00| <5> thread: created thread 9 [tid: 254938]
+[  0.016057] CPU 08| <5> thread: created thread 10 [tid: 254939]
+[  0.016773] CPU 02| <5> thread: created thread 11 [tid: 254940]
+transferred 3448.26 MB/s
+transactions rate 84309.5 transactions/s
+request/response size 4096 bytes
+[  0.136478] CPU 02| <5> init: shutting down -> SUCCESS
++ kill 254790
++ wait 254790
++ true
++ NP_PID=
++ pushd apps/loadgen
+$CALADAN_ROOT/apps/loadgen $CALADAN_ROOT
++ ensure_cargo
++ command -v cargo
+++ command -v cargo
++ CARGO_BIN=$HOME/.cargo/bin/cargo
++ return
++ $HOME/.cargo/bin/cargo build --release
+warning: unnecessary `unsafe` block
+ --> $CALADAN_ROOT/bindings/rust/src/asm.rs:8:5
+  |
+8 |     unsafe { core::arch::x86_64::__cpuid(0) };
+  |     ^^^^^^ unnecessary `unsafe` block
+  |
+  = note: `#[warn(unused_unsafe)]` (part of `#[warn(unused)]`) on by default
+
+warning: `shenango` (lib) generated 1 warning
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> src/main.rs:151:23
+    |
+151 |     pub fn new(inbuf: &mut [u8]) -> Buffer {
+    |                       ^^^^^^^^^     ^^^^^^ the same lifetime is hidden here
+    |                       |
+    |                       the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+    = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+help: use `'_` for type paths
+    |
+151 |     pub fn new(inbuf: &mut [u8]) -> Buffer<'_> {
+    |                                           ++++
+
+warning: `loadgen` (bin "loadgen") generated 1 warning (run `cargo fix --bin "loadgen" -p loadgen` to apply 1 suggestion)
+    Finished `release` profile [optimized] target(s) in 0.20s
++ popd
+$CALADAN_ROOT
++ LOADGEN_RUNTIME_S=1
++ LOADGEN_SAMPLES=2
++ LOADGEN_RAMPUP_S=0
++ LOADGEN_MPPS=0.001
++ LOADGEN_CONNS=1
++ LOADGEN_TIMEOUT_S=30
++ for LOADGEN_TRANSPORT in tcp udp
++ gen_configs
++ exec
++ exec
++ LG_SRV_PID=254961
++ sleep 1
++ apps/loadgen/target/release/loadgen 192.168.1.5:5000 --config /proc/self/fd/44 --mode spawner-server --transport tcp
+CPU 07| <5> thread: created thread 0 [tid: 254961]
+CPU 07| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000316] CPU 07| <5> loading configuration from '/proc/self/fd/44'
+[  0.000346] CPU 07| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000350] CPU 07| <5> cfg: task is latency critical (LC)
+[  0.000352] CPU 07| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000354] CPU 07| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000358] CPU 07| <5> process pid: 254961
+[  0.014690] CPU 07| <5> shm: using 71303168 bytes
+[  0.014723] CPU 07| <5> uintr: enabled
+[  0.014730] CPU 07| <5> net: started network stack
+[  0.014732] CPU 07| <5> net: using the following configuration:
+[  0.014734] CPU 07| <5>   addr:	192.168.1.5
+[  0.014736] CPU 07| <5>   netmask:	255.255.255.0
+[  0.014737] CPU 07| <5>   gateway:	192.168.1.1
+[  0.014739] CPU 07| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014740] CPU 07| <5>   mtu:		1500
+[  0.014742] CPU 07| <3> ****************************************************************************************
+[  0.014743] CPU 07| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014745] CPU 07| <3> *                                                                                      *
+[  0.014746] CPU 07| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014748] CPU 07| <3> *                                                                                      *
+[  0.014750] CPU 07| <3> ****************************************************************************************
+[  0.015031] CPU 07| <5> spawning 12 kthreads
+[  0.015120] CPU 06| <5> thread: created thread 1 [tid: 254964]
+[  0.015138] CPU 04| <5> thread: created thread 3 [tid: 254965]
+[  0.015162] CPU 10| <5> thread: created thread 2 [tid: 254963]
+[  0.015431] CPU 08| <5> thread: created thread 4 [tid: 254966]
+[  0.015483] CPU 09| <5> thread: created thread 5 [tid: 254967]
+[  0.015513] CPU 05| <5> thread: created thread 6 [tid: 254968]
+[  0.015525] CPU 10| <5> thread: created thread 7 [tid: 254969]
+[  0.016004] CPU 07| <5> thread: created thread 8 [tid: 254970]
+[  0.016214] CPU 07| <5> thread: created thread 10 [tid: 254972]
+[  0.016230] CPU 13| <5> thread: created thread 9 [tid: 254971]
+[  0.016761] CPU 11| <5> thread: created thread 11 [tid: 254973]
+Bound to address 192.168.1.5:5000
++ timeout 30s apps/loadgen/target/release/loadgen 192.168.1.5:5000 --config /proc/self/fd/45 --mode runtime-client --runtime 1 --samples 2 --rampup 0 --mpps 0.001 --conns 1 --transport tcp --output normal
+CPU 06| <5> thread: created thread 0 [tid: 254975]
+CPU 06| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000321] CPU 06| <5> loading configuration from '/proc/self/fd/45'
+[  0.000354] CPU 06| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000357] CPU 06| <5> cfg: task is latency critical (LC)
+[  0.000360] CPU 06| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000362] CPU 06| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000367] CPU 06| <5> process pid: 254975
+[  0.014638] CPU 06| <5> shm: using 71303168 bytes
+[  0.014665] CPU 06| <5> uintr: enabled
+[  0.014671] CPU 06| <5> net: started network stack
+[  0.014673] CPU 06| <5> net: using the following configuration:
+[  0.014675] CPU 06| <5>   addr:	192.168.1.6
+[  0.014676] CPU 06| <5>   netmask:	255.255.255.0
+[  0.014678] CPU 06| <5>   gateway:	192.168.1.1
+[  0.014679] CPU 06| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014681] CPU 06| <5>   mtu:		1500
+[  0.014682] CPU 06| <3> ****************************************************************************************
+[  0.014683] CPU 06| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014685] CPU 06| <3> *                                                                                      *
+[  0.014686] CPU 06| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014687] CPU 06| <3> *                                                                                      *
+[  0.014688] CPU 06| <3> ****************************************************************************************
+[  0.014978] CPU 06| <5> spawning 12 kthreads
+[  0.015083] CPU 07| <5> thread: created thread 2 [tid: 254977]
+[  0.015097] CPU 08| <5> thread: created thread 1 [tid: 254976]
+[  0.015129] CPU 04| <5> thread: created thread 4 [tid: 254979]
+[  0.015143] CPU 10| <5> thread: created thread 3 [tid: 254978]
+[  0.015237] CPU 05| <5> thread: created thread 5 [tid: 254980]
+[  0.015279] CPU 09| <5> thread: created thread 6 [tid: 254981]
+[  0.015357] CPU 02| <5> thread: created thread 7 [tid: 254982]
+[  0.015899] CPU 03| <5> thread: created thread 8 [tid: 254983]
+[  0.016047] CPU 08| <5> thread: created thread 9 [tid: 254984]
+[  0.016260] CPU 07| <5> thread: created thread 10 [tid: 254985]
+[  0.016327] CPU 07| <5> thread: created thread 11 [tid: 254986]
+Running with rank: 0
+Distribution, Target, Actual, Dropped, Schedule Adherance, Min, Median, 90th, 99th, 99.9th, 99.99th, Max, Start, StartTsc
+zero, 15, 15, 0, 2.90, 16.0, 21.0, 29.0, 30.0, 30.0, 30.0, 58.0, 1779895251, 697539834377405
+Aborting: schedule adherance is low - the client is saturating.
+[  2.637427] CPU 04| <5> init: shutting down -> SUCCESS
++ stop_loadgen_server
++ [[ -n 254961 ]]
++ kill 254961
++ wait 254961
++ true
++ LG_SRV_PID=
++ for LOADGEN_TRANSPORT in tcp udp
++ gen_configs
++ exec
++ exec
++ LG_SRV_PID=255002
++ sleep 1
++ apps/loadgen/target/release/loadgen 192.168.1.5:5000 --config /proc/self/fd/46 --mode spawner-server --transport udp
+CPU 04| <5> thread: created thread 0 [tid: 255002]
+CPU 04| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000312] CPU 04| <5> loading configuration from '/proc/self/fd/46'
+[  0.000344] CPU 04| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000360] CPU 04| <5> cfg: task is latency critical (LC)
+[  0.000362] CPU 04| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000364] CPU 04| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000368] CPU 04| <5> process pid: 255002
+[  0.014661] CPU 04| <5> shm: using 71303168 bytes
+[  0.014690] CPU 04| <5> uintr: enabled
+[  0.014695] CPU 04| <5> net: started network stack
+[  0.014697] CPU 04| <5> net: using the following configuration:
+[  0.014700] CPU 04| <5>   addr:	192.168.1.5
+[  0.014702] CPU 04| <5>   netmask:	255.255.255.0
+[  0.014704] CPU 04| <5>   gateway:	192.168.1.1
+[  0.014705] CPU 04| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014707] CPU 04| <5>   mtu:		1500
+[  0.014709] CPU 04| <3> ****************************************************************************************
+[  0.014711] CPU 04| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014713] CPU 04| <3> *                                                                                      *
+[  0.014714] CPU 04| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014716] CPU 04| <3> *                                                                                      *
+[  0.014717] CPU 04| <3> ****************************************************************************************
+[  0.015001] CPU 04| <5> spawning 12 kthreads
+[  0.015082] CPU 06| <5> thread: created thread 1 [tid: 255005]
+[  0.015114] CPU 10| <5> thread: created thread 2 [tid: 255004]
+[  0.015415] CPU 11| <5> thread: created thread 3 [tid: 255006]
+[  0.015420] CPU 07| <5> thread: created thread 4 [tid: 255007]
+[  0.015449] CPU 05| <5> thread: created thread 5 [tid: 255008]
+[  0.015487] CPU 10| <5> thread: created thread 6 [tid: 255009]
+[  0.015793] CPU 09| <5> thread: created thread 7 [tid: 255010]
+[  0.016075] CPU 05| <5> thread: created thread 8 [tid: 255011]
+[  0.016134] CPU 10| <5> thread: created thread 9 [tid: 255012]
+[  0.016334] CPU 04| <5> thread: created thread 10 [tid: 255013]
+[  0.016795] CPU 02| <5> thread: created thread 11 [tid: 255014]
+192.168.1.5:5000
++ timeout 30s apps/loadgen/target/release/loadgen 192.168.1.5:5000 --config /proc/self/fd/47 --mode runtime-client --runtime 1 --samples 2 --rampup 0 --mpps 0.001 --conns 1 --transport udp --output normal
+CPU 11| <5> thread: created thread 0 [tid: 255034]
+CPU 11| <5> cpu: detected 14 cores, 1 nodes (1 with mem)
+[  0.000323] CPU 11| <5> loading configuration from '/proc/self/fd/47'
+[  0.000355] CPU 11| <5> cfg: provisioned 12 cores (0 guaranteed, 12 burstable, 0 spinning)
+[  0.000358] CPU 11| <5> cfg: task is latency critical (LC)
+[  0.000360] CPU 11| <5> cfg: THRESH_QD: 10, THRESH_HT: 0 THRESH_QUANTUM: 100
+[  0.000362] CPU 11| <5> cfg: storage disabled, directpath disabled, transparent hugepages disabled
+[  0.000367] CPU 11| <5> process pid: 255034
+[  0.014898] CPU 11| <5> shm: using 71303168 bytes
+[  0.014923] CPU 11| <5> uintr: enabled
+[  0.014929] CPU 11| <5> net: started network stack
+[  0.014931] CPU 11| <5> net: using the following configuration:
+[  0.014933] CPU 11| <5>   addr:	192.168.1.6
+[  0.014935] CPU 11| <5>   netmask:	255.255.255.0
+[  0.014936] CPU 11| <5>   gateway:	192.168.1.1
+[  0.014938] CPU 11| <5>   mac:		C2:2E:BF:01:11:0E
+[  0.014939] CPU 11| <5>   mtu:		1500
+[  0.014941] CPU 11| <3> ****************************************************************************************
+[  0.014943] CPU 11| <3> *                           WARNING: DIRECTPATH DISABLED                               *
+[  0.014944] CPU 11| <3> *                                                                                      *
+[  0.014946] CPU 11| <3> *                        DO NOT USE FOR PERFORMANCE BENCHMARKS                         *
+[  0.014947] CPU 11| <3> *                                                                                      *
+[  0.014949] CPU 11| <3> ****************************************************************************************
+[  0.015255] CPU 11| <5> spawning 12 kthreads
+[  0.015326] CPU 10| <5> thread: created thread 1 [tid: 255052]
+[  0.015338] CPU 06| <5> thread: created thread 2 [tid: 255053]
+[  0.015386] CPU 05| <5> thread: created thread 3 [tid: 255054]
+[  0.015417] CPU 09| <5> thread: created thread 4 [tid: 255055]
+[  0.015447] CPU 08| <5> thread: created thread 5 [tid: 255056]
+[  0.015538] CPU 03| <5> thread: created thread 6 [tid: 255057]
+[  0.016134] CPU 02| <5> thread: created thread 7 [tid: 255058]
+[  0.016313] CPU 07| <5> thread: created thread 8 [tid: 255060]
+[  0.016392] CPU 13| <5> thread: created thread 9 [tid: 255061]
+[  0.016978] CPU 08| <5> thread: created thread 10 [tid: 255062]
+[  0.017105] CPU 00| <5> thread: created thread 11 [tid: 255063]
+Running with rank: 0
+Distribution, Target, Actual, Dropped, Schedule Adherance, Min, Median, 90th, 99th, 99.9th, 99.99th, Max, Start, StartTsc
+zero, 10, 10, 0, 1.78, 17.0, 19.0, 20.0, 20.0, 20.0, 20.0, 20.0, 1779895254, 697553138264393
+Aborting: schedule adherance is low - the client is saturating.
+[  2.637153] CPU 02| <5> init: shutting down -> SUCCESS
++ stop_loadgen_server
++ [[ -n 255002 ]]
++ kill 255002
++ wait 255002
++ true
++ LG_SRV_PID=
++ cleanup
++ set +e
++ [[ -n '' ]]
++ [[ -n '' ]]
++ [[ -n 254163 ]]
++ sudo kill 254163
++ wait 254163
++ true

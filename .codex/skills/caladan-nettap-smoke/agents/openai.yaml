@@ -1,0 +1,4 @@
+interface:
+  display_name: "Caladan Nettap Smoke"
+  short_description: "Build and smoke-test nettap Caladan"
+  default_prompt: "Use $caladan-nettap-smoke to build Caladan and run the nettap iokernel smoke test."

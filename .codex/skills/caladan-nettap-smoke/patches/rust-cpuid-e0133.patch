@@ -1,0 +1,13 @@
+diff --git a/bindings/rust/src/asm.rs b/bindings/rust/src/asm.rs
+index 9dce0f6..253d87c 100644
+--- a/bindings/rust/src/asm.rs
++++ b/bindings/rust/src/asm.rs
+@@ -5,7 +5,7 @@ pub fn cpu_relax() {
+ 
+ #[inline]
+ pub fn cpu_serialize() {
+-    core::arch::x86_64::__cpuid(0);
++    unsafe { core::arch::x86_64::__cpuid(0) };
+ }
+ 
+ #[inline]
